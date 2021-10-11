@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гонки!</title>
+</head>
+
+<body>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script>
+        var Car = function(x, y, img) {
+            this.x = x
+            this.y = y
+            this.draw(img)
+        }
+        Car.prototype.draw = function(img) {
+            var carHtml = img
+            this.carElement = $(carHtml)
+            this.carElement.css({
+                position: "absolute",
+                left: this.x,
+                top: this.y
+            })
+            $('body').append(this.carElement)
+        }
+
+        Car.prototype.moveRight = function(speed) {
+            this.x += speed
+            this.carElement.css({
+                left: this.x,
+                top: this.y
+            })
+            if (this.x > 950) {
+                clearInterval(setIntervalId)
+                clearInterval(setIntervalId1)
+            }
+        }
+        Car.prototype.moveLeft = function(speed) {
+            this.x -= speed
+            this.carElement.css({
+                left: this.x,
+                top: this.y
+            })
+        }
+
+        Car.prototype.moveUp = function(speed) {
+            this.y -= speed
+            this.carElement.css({
+                left: this.x,
+                top: this.y
+            })
+        }
+
+        Car.prototype.moveDown = function(speed) {
+            this.y += speed
+            this.carElement.css({
+                left: this.x,
+                top: this.y
+            })
+            if (this.y > 600) {
+                clearInterval(setIntervalId)
+            }
+        }
+
+
+        function Second() {
+            function accidentallySecond() {
+                var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                var accidentallySec = Math.floor(Math.random() * array.length)
+                return accidentallySec
+            }
+            var accidentallyNissan = accidentallySecond()
+            nissan.moveRight(accidentallyNissan)
+        }
+        var setIntervalId = setInterval(Second, 30)
+
+
+        function First() {
+            function accidentallyFirst() {
+                var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                var accidentallyFir = Math.floor(Math.random() * array.length)
+                return accidentallyFir
+            }
+            var accidentallyTesla = accidentallyFirst()
+            tesla.moveRight(accidentallyTesla)
+        }
+        var setIntervalId1 = setInterval(First, 30)
+
+        var tesla = new Car(20, 20, '<img src="https://nostarch.com/images/car.png?__cf_chl_captcha_tk__=pmd_bae01960d4e59ef9c8b37de3ab144e7a48df0ba5-1628238461-0-gqNtZGzNArijcnBszQni">')
+        var nissan = new Car(20, 200, '<img src="https://nostarch.com/images/car.png?__cf_chl_captcha_tk__=pmd_bae01960d4e59ef9c8b37de3ab144e7a48df0ba5-1628238461-0-gqNtZGzNArijcnBszQni">')
+    </script>
+</body>
+
+</html>

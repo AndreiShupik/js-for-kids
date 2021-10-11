@@ -1,0 +1,30 @@
+img {
+    width: 800px;
+    height: 800px;
+}
+
+
+/*#canvas {
+    border: 2px solid purple;
+}*/
+
+#showAttempts {
+    position: absolute;
+    margin: 160px 0px 0px 0px;
+}
+
+#button {
+    position: absolute;
+    margin-top: 35px;
+    margin-left: -80px;
+}
+
+#newGame {
+    position: absolute;
+    margin-top: 0px;
+    margin-left: -81px;
+}
+
+body {
+    height: 350px;
+}

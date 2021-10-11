@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Виселица тест!</h1>
+    <p id="showAttempts"></p>
+    <canvas id="canvas" width="400" heigth="150"></canvas>
+    <button id="button" onclick="letsGo()">Let's go!</button>
+    <button id="newGame" onclick="newGame()">New game</button>
+    <script>
+        // Рисуем оболочку для человека
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+        ctx.lineWidth = 2
+        ctx.strokeRect(0, 0, 60, 115)
+
+        function newGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            attempts = 6
+            ctx.lineWidth = 2
+            ctx.strokeRect(0, 0, 60, 115)
+        }
+
+        function hangMan(number) {
+
+            ctx.lineWidth = 4
+            var showAttempts = document.getElementById('showAttempts')
+            if (number === 5) {
+                ctx.strokeRect(20, 10, 20, 20)
+                showAttempts.innerHTML = "Осталось 5 попыток из 6ти"
+            } else if (number === 4) {
+                ctx.beginPath()
+                ctx.moveTo(30, 30)
+                ctx.lineTo(30, 70)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталось 4 попытоки из 6ти"
+            } else if (number === 3) {
+                ctx.beginPath()
+                ctx.moveTo(10, 40)
+                ctx.lineTo(30, 50)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталось 3 попытоки из 6ти"
+            } else if (number === 2) {
+                ctx.beginPath()
+                ctx.moveTo(30, 50)
+                ctx.lineTo(50, 40)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталось 2 попытоки из 6ти"
+            } else if (number === 1) {
+                ctx.beginPath()
+                ctx.moveTo(30, 70)
+                ctx.lineTo(10, 105)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталась 1 попытока из 6ти"
+            } else if (number === 0) {
+                ctx.beginPath()
+                ctx.moveTo(30, 70)
+                ctx.lineTo(50, 105)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталось 0 попыток из 6ти"
+            }
+        }
+
+        function pickWord() {
+            var words = ["программа", "макака", "прекрасный", "оладушек", "петушок", "ежик", "матвеев", "яблоко", "морковь", "мюсли"];
+            var word = words[Math.floor(Math.random() * words.length)];
+            return word;
+        }
+
+        function setupAnswerArray(word) {
+            var answerArray = [];
+            for (var i = 0; i < word.length; i++) {
+                answerArray[i] = "_";
+            }
+            return answerArray;
+        }
+
+        function drawLines(array) {
+            for (i = 0; i < array.length; i++) {
+                if (i > 0) {
+                    var coef = i * 3
+                    var gap = 10 * i
+                    var distance = gap + (10 * coef)
+                    ctx.lineWidth = 4
+                    ctx.beginPath()
+                    ctx.moveTo(distance, 145)
+                    ctx.lineTo(distance + 30, 145)
+                    ctx.stroke()
+                }
+                ctx.lineWidth = 4
+                ctx.beginPath()
+                ctx.moveTo(0, 145)
+                ctx.lineTo(30, 145)
+                ctx.stroke()
+            }
+        }
+
+        function guessedLetters(letter) {
+            ctx.font = "30px Courier"
+            ctx.fillStyle = "Black"
+            ctx.textAlign = "center"
+            ctx.textBaseline = "top"
+            if (letter === answerArray[0]) {
+                ctx.fillText(letter, 15, 115)
+            }
+            if (letter === answerArray[1]) {
+                ctx.fillText(letter, 55, 115)
+            }
+            if (letter === answerArray[2]) {
+                ctx.fillText(letter, 95, 115)
+            }
+            if (letter === answerArray[3]) {
+                ctx.fillText(letter, 135, 115)
+            }
+            if (letter === answerArray[4]) {
+                ctx.fillText(letter, 175, 115)
+            }
+            if (letter === answerArray[5]) {
+                ctx.fillText(letter, 215, 115)
+            }
+            if (letter === answerArray[6]) {
+                ctx.fillText(letter, 255, 115)
+            }
+            if (letter === answerArray[7]) {
+                ctx.fillText(letter, 295, 115)
+            }
+            if (letter === answerArray[8]) {
+                ctx.fillText(letter, 335, 115)
+            }
+            if (letter === answerArray[9]) {
+                ctx.fillText(letter, 375, 115)
+            }
+        }
+
+        function lineThrough() {
+            ctx.font = "30px Courier"
+            ctx.fillStyle = "Black"
+            ctx.textAlign = "center"
+            ctx.textBaseline = "top"
+            if (attempts === 5) {
+                ctx.beginPath()
+                ctx.moveTo(65, 15)
+                ctx.lineTo(95, 15)
+                ctx.stroke()
+            } else if (attempts === 4) {
+                ctx.beginPath()
+                ctx.moveTo(105, 15)
+                ctx.lineTo(135, 15)
+                ctx.stroke()
+            } else if (attempts === 3) {
+                ctx.beginPath()
+                ctx.moveTo(145, 15)
+                ctx.lineTo(175, 15)
+                ctx.stroke()
+            } else if (attempts === 2) {
+                ctx.beginPath()
+                ctx.moveTo(185, 15)
+                ctx.lineTo(215, 15)
+                ctx.stroke()
+            } else if (attempts === 1) {
+                ctx.beginPath()
+                ctx.moveTo(225, 15)
+                ctx.lineTo(255, 15)
+                ctx.stroke()
+            } else if (attempts === 0) {
+                ctx.beginPath()
+                ctx.moveTo(265, 15)
+                ctx.lineTo(295, 15)
+                ctx.stroke()
+            }
+        }
+
+        function wrongLetters(letter) {
+            ctx.font = "30px Courier"
+            ctx.fillStyle = "Black"
+            ctx.textAlign = "center"
+            ctx.textBaseline = "top"
+            if (attempts === 5) {
+                ctx.fillText(letter, 80, 0)
+            } else if (attempts === 4) {
+                ctx.fillText(letter, 120, 0)
+            } else if (attempts === 3) {
+                ctx.fillText(letter, 160, 0)
+            } else if (attempts === 2) {
+                ctx.fillText(letter, 200, 0)
+            } else if (attempts === 1) {
+                ctx.fillText(letter, 240, 0)
+            } else if (attempts === 0) {
+                ctx.fillText(letter, 280, 0)
+            }
+        }
+
+        function showPlayerProgress(answerArray) {
+            alert(answerArray.join(""));
+        }
+
+        function getGuess() {
+            var guess = prompt("Угадайте букву, или нажмите Отмена для выхода из игры.");
+            return guess;
+        }
+
+        function updateGameState(guess, word, answerArray) {
+            var correctGuesses = 0;
+            for (j = 0; j < word.length; j++) {
+                if (word[j] === guess) {
+                    answerArray[j] = guess;
+                    correctGuesses++;
+                    guessedLetters(guess)
+                }
+            }
+            if (correctGuesses === 0) {
+                attempts--
+                hangMan(attempts)
+                wrongLetters(guess)
+                lineThrough()
+            } else {
+                showPlayerProgress(answerArray);
+            }
+            return correctGuesses
+        }
+
+        function showAnswerAndCongratulatePlayer(answerArray) {
+            alert("Отлично! Было загадано слово " + word);
+        }
+        // word: загаданное слово
+        var word = pickWord();
+        // answerArray: итоговый массив
+        var answerArray = setupAnswerArray(word);
+
+        // remainingLetters: сколько букв осталось угадать
+        var remainingLetters = word.length;
+        // attempts: количество попыток
+        var attempts = 6
+
+        showPlayerProgress(answerArray);
+        drawLines(answerArray)
+
+        function letsGo() {
+            var guess = getGuess();
+            // guess: ответ игрока
+            if (guess === null) {
+                alert("Было загадано слово: " + word)
+            } else if (guess.length !== 1) {
+                alert("Пожалуйста, введите одиночную букву.");
+            } else {
+                // correctGuesses: количество открытых букв
+                var correctGuesses = updateGameState(guess, word,
+                    answerArray);
+                remainingLetters -= correctGuesses;
+                if (remainingLetters === 0) {
+                    showAnswerAndCongratulatePlayer(answerArray);
+                }
+            }
+            if (attempts === 0) {
+                alert("Попытки закончились")
+                alert("Было загадано слово: " + word)
+            }
+        }
+
+        /*// Рисуем оболочку для человека
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+        ctx.lineWidth = 2
+        ctx.strokeRect(0, 0, 60, 115)
+
+        function hangMan(number) {
+            ctx.lineWidth = 4
+            var showAttempts = document.getElementById('showAttempts')
+
+            if (number === 5) {
+                ctx.strokeRect(20, 10, 20, 20)
+                showAttempts.innerHTML = "Осталось 5 попыток из 6ти"
+            } else if (number === 4) {
+                ctx.beginPath()
+                ctx.moveTo(30, 30)
+                ctx.lineTo(30, 70)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталось 4 попытоки из 6ти"
+            } else if (number === 3) {
+                ctx.beginPath()
+                ctx.moveTo(10, 40)
+                ctx.lineTo(30, 50)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталось 3 попытоки из 6ти"
+            } else if (number === 2) {
+                ctx.beginPath()
+                ctx.moveTo(30, 50)
+                ctx.lineTo(50, 40)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталось 2 попытоки из 6ти"
+            } else if (number === 1) {
+                ctx.beginPath()
+                ctx.moveTo(30, 70)
+                ctx.lineTo(10, 105)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталась 1 попытока из 6ти"
+            } else if (number === 0) {
+                ctx.beginPath()
+                ctx.moveTo(30, 70)
+                ctx.lineTo(50, 105)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталось 0 попыток из 6ти"
+            }
+        }
+
+        function pickWord() {
+            var words = ["программа", "макака", "прекрасный", "оладушек", "петушек", "ежик", "матвеев", "яблоко", "морковь", "мюсли"];
+            var word = words[Math.floor(Math.random() * words.length)];
+            return word;
+        }
+
+        function setupAnswerArray(word) {
+            var answerArray = [];
+            for (var i = 0; i < word.length; i++) {
+                answerArray[i] = "_";
+            }
+            return answerArray;
+        }
+
+        function showPlayerProgress(answerArray) {
+            alert(answerArray.join(""));
+        }
+
+        function getGuess() {
+            var guess = prompt("Угадайте букву, или нажмите Отмена для выхода из игры.");
+            return guess;
+        }
+
+        function updateGameState(guess, word, answerArray) {
+            var correctGuesses = 0;
+            for (j = 0; j < word.length; j++) {
+                if (word[j] === guess) {
+                    answerArray[j] = guess;
+                    correctGuesses++;
+                }
+            }
+            if (correctGuesses === 0) {
+                attempts--
+                hangMan(attempts)
+                    /*(function(html) {
+                        setTimeout(function() {
+
+                        }, 0)
+                    })*/
+
+        /*var ms = 1000
+
+                function pauseComp(ms) {
+                    var date = new Date()
+                    var curDate = null
+                    do {
+                        curDate = new Date()
+                    }
+                    while (curDate - date < ms)
+                }
+                pauseComp(ms)
+            }
+            return correctGuesses
+        }
+
+        function showAnswerAndCongratulatePlayer(answerArray) {
+            alert(answerArray.join(""));
+            alert("Отлично! Было загадано слово " + word);
+        }
+        // word: загаданное слово
+        var word = pickWord();
+        // answerArray: итоговый массив
+        var answerArray = setupAnswerArray(word);
+        // remainingLetters: сколько букв осталось угадать
+        var remainingLetters = word.length;
+        // attempts: количество попыток
+        var attempts = 6
+
+        /*var startContinue = document.querySelector('body')
+        startContinue.addEventListener('mousemove', function() {})*/
+        /*while (remainingLetters > 0) {
+            showPlayerProgress(answerArray);
+            var guess = getGuess();
+            // guess: ответ игрока
+            if (guess === null) {
+                alert("Было загадано слово: " + word)
+                break
+            } else if (guess.length !== 1) {
+                alert("Пожалуйста, введите одиночную букву.");
+            } else {
+                // correctGuesses: количество открытых букв
+                var correctGuesses = updateGameState(guess, word,
+                    answerArray);
+                remainingLetters -= correctGuesses;
+            }
+            if (attempts === 0) {
+                alert("Попытки закончились")
+                alert("Было загадано слово: " + word)
+                break
+            }
+        }
+        if (guess !== null && attempts !== 0) {
+            showAnswerAndCongratulatePlayer(answerArray);
+        }*/
+    </script>
+</body>
+
+</html>
+
+<!--// Рисуем оболочку для человека
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+        ctx.lineWidth = 2
+        ctx.strokeRect(0, 0, 60, 115)
+
+        function newGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            attempts = 6
+            ctx.lineWidth = 2
+            ctx.strokeRect(0, 0, 60, 115)
+        }
+
+        function hangMan(number) {
+
+            ctx.lineWidth = 4
+            var showAttempts = document.getElementById('showAttempts')
+            if (number === 5) {
+                ctx.strokeRect(20, 10, 20, 20)
+                showAttempts.innerHTML = "Осталось 5 попыток из 6ти"
+            } else if (number === 4) {
+                ctx.beginPath()
+                ctx.moveTo(30, 30)
+                ctx.lineTo(30, 70)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталось 4 попытоки из 6ти"
+            } else if (number === 3) {
+                ctx.beginPath()
+                ctx.moveTo(10, 40)
+                ctx.lineTo(30, 50)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталось 3 попытоки из 6ти"
+            } else if (number === 2) {
+                ctx.beginPath()
+                ctx.moveTo(30, 50)
+                ctx.lineTo(50, 40)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталось 2 попытоки из 6ти"
+            } else if (number === 1) {
+                ctx.beginPath()
+                ctx.moveTo(30, 70)
+                ctx.lineTo(10, 105)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталась 1 попытока из 6ти"
+            } else if (number === 0) {
+                ctx.beginPath()
+                ctx.moveTo(30, 70)
+                ctx.lineTo(50, 105)
+                ctx.stroke()
+                showAttempts.innerHTML = "Осталось 0 попыток из 6ти"
+            }
+        }
+
+        function pickWord() {
+            var words = ["программа", "макака", "прекрасный", "оладушек", "петушок", "ежик", "матвеев", "яблоко", "морковь", "мюсли"];
+            var word = words[Math.floor(Math.random() * words.length)];
+            return word;
+        }
+
+        function setupAnswerArray(word) {
+            var answerArray = [];
+            for (var i = 0; i < word.length; i++) {
+                answerArray[i] = "_";
+            }
+            return answerArray;
+        }
+
+        function showPlayerProgress(answerArray) {
+            alert(answerArray.join(""));
+        }
+
+        function getGuess() {
+            var guess = prompt("Угадайте букву, или нажмите Отмена для выхода из игры.");
+            return guess;
+        }
+
+        function updateGameState(guess, word, answerArray) {
+            var correctGuesses = 0;
+            for (j = 0; j < word.length; j++) {
+                if (word[j] === guess) {
+                    answerArray[j] = guess;
+                    correctGuesses++;
+                }
+            }
+            if (correctGuesses === 0) {
+                attempts--
+                hangMan(attempts)
+            } else {
+                showPlayerProgress(answerArray);
+            }
+            return correctGuesses
+        }
+
+        function showAnswerAndCongratulatePlayer(answerArray) {
+            alert("Отлично! Было загадано слово " + word);
+        }
+        // word: загаданное слово
+        var word = pickWord();
+        // answerArray: итоговый массив
+        var answerArray = setupAnswerArray(word);
+        // remainingLetters: сколько букв осталось угадать
+        var remainingLetters = word.length;
+        // attempts: количество попыток
+        var attempts = 6
+
+        showPlayerProgress(answerArray);
+
+        function letsGo() {
+            var guess = getGuess();
+            // guess: ответ игрока
+            if (guess === null) {
+                alert("Было загадано слово: " + word)
+            } else if (guess.length !== 1) {
+                alert("Пожалуйста, введите одиночную букву.");
+            } else {
+                // correctGuesses: количество открытых букв
+                var correctGuesses = updateGameState(guess, word,
+                    answerArray);
+                remainingLetters -= correctGuesses;
+                if (remainingLetters === 0) {
+                    showAnswerAndCongratulatePlayer(answerArray);
+                }
+            }
+            if (attempts === 0) {
+                alert("Попытки закончились")
+                alert("Было загадано слово: " + word)
+            }
+        }-->
