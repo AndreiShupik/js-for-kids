@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гонки!</title>
+</head>
+
+<body>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script>
+        var Car = function(x, y) {
+            this.x = x;
+            this.y = y;
+        };
+        var drawCar = function(car) {
+            var carHtml = '<img src="https://nostarch.com/images/car.png?__cf_chl_captcha_tk__=pmd__YYflU._JWv_XvOAK8GPWWLXiGRcwqfe2f8AquWA9to-1634651153-0-gqNtZGzNAuWjcnBszQf9">'
+            var carElement = $(carHtml);
+            carElement.css({
+                position: "absolute",
+                left: car.x,
+                top: car.y
+            });
+            $("body").append(carElement);
+        };
+
+        var tesla = new Car(20, 20)
+        var nissan = new Car(100, 200)
+        drawCar(tesla)
+        drawCar(nissan)
+    </script>
+</body>
+
+</html>
