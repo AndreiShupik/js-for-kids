@@ -13,8 +13,11 @@
     <canvas id="canvas" width="700" height="500"></canvas>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
     <script>
-        // Ireland--------------------------------------------------------------
-        /*var canvas = document.getElementById("canvas")
+        var canvas = document.getElementById("canvas")
+        var ctx = canvas.getContext("2d")
+
+        // Flag of Ireland-----------------------------------------------------
+        /* var canvas = document.getElementById("canvas")
         var ctx = canvas.getContext("2d")
         ctx.fillStyle = "Aquamarine"
         ctx.fillRect(0, 0, 50, 100)
@@ -23,10 +26,12 @@
         ctx1.fillRect(50, 0, 50, 100)
         var ctx2 = canvas.getContext("2d")
         ctx1.fillStyle = "Cornsilk"
-        ctx2.fillRect(100, 0, 50, 100)*/
+        ctx2.fillRect(100, 0, 50, 100) */
 
-        // Домик---------------------------------------------------------------
-        /*var canvas = document.getElementById("canvas")
+
+
+        // Plain house---------------------------------------------------------
+        /* var canvas = document.getElementById("canvas")
         var ctx = canvas.getContext("2d")
         ctx.fillStyle = "Purple"
         ctx.beginPath()
@@ -36,27 +41,26 @@
         ctx.lineTo(160, 60)
         ctx.lineTo(160, 100)
         ctx.lineTo(100, 100)
-        ctx.fill()*/
+        ctx.fill() */
 
-        // Окружности-----------------------------------------------------------
-        /*var canvas = document.getElementById("canvas")
+
+
+        // Drawing circles------------------------------------------------------
+        /* var canvas = document.getElementById("canvas")
         var ctx = canvas.getContext("2d")
         ctx.lineWidth = 2
         ctx.strokeStyle = "Pink"
-
         ctx.beginPath()
         ctx.arc(50, 50, 20, 0, Math.PI / 2, false)
         ctx.stroke()
-
         ctx.beginPath()
         ctx.arc(100, 50, 20, 0, Math.PI, false)
         ctx.stroke()
-
         ctx.beginPath()
         ctx.arc(150, 50, 20, 0, Math.PI * 2, false)
-        ctx.stroke()*/
+        ctx.stroke()
 
-        // Функция рисования круга-----------------------------------------------------------------   
+        // Function of drawing circle-------------------------------------------  
         var circle = function(x, y, radius, fillCircle, color) {
             ctx.beginPath()
             if (fillCircle === true) {
@@ -70,33 +74,91 @@
             }
         }
 
-        // Функция рисования снеговика-------------------------------------------------------------
-        /* function drawSnowman(x, y) {
-             ctx.lineWidth = 4,
-                 circle(x, y, 30, false, "Black")
-             var valueY1 = y + 5
-             circle(x, valueY1, 5, true, "Orange")
-             var valueX2 = x - 10
-             var valueY2 = y - 5
-             circle(valueX2, valueY2, 5, true, "Black")
-             var valueX3 = x + 10
-             var valueY3 = y - 5
-             circle(valueX3, valueY3, 5, true, "Black")
-             var valueY4 = y + 70
-             circle(x, valueY4, 40, false, "Black")
-             var valueY5 = y + 70
-             circle(x, valueY5, 5, true, "Black")
-             var valueY6 = y + 50
-             circle(x, valueY6, 5, true, "Black")
-             var valueY7 = y + 90
-             circle(x, valueY7, 5, true, "Black")
-         }*/
+        // Drawing unfilled circles----------------------------------------------
+        ctx.lineWidth = 4
+        circle(100, 100, 10, false, "Red")
+        circle(100, 100, 20, false, "Orange")
+        circle(100, 100, 30, false, "Yellow")
+        circle(100, 100, 40, false, "Green")
+        circle(100, 100, 50, false, "Blue")
+        circle(100, 100, 60, false, "Purple")
 
+        // Drawing filled circles------------------------------------------------
+        ctx.lineWidth = 4
+        circle(250, 100, 60, true, "Purple")
+        circle(250, 100, 50, true, "Blue")
+        circle(250, 100, 40, true, "Green")
+        circle(250, 100, 30, true, "Yellow")
+        circle(250, 100, 20, true, "Orange")
+        circle(250, 100, 10, true, "Red")
+
+        // Function of filling circles-------------------------------------------
         var canvas = document.getElementById("canvas")
         var ctx = canvas.getContext("2d")
+        var circle = function(x, y, radius) {
+            ctx.beginPath()
+            ctx.arc(x, y, radius, 0, Math.PI * 2, false)
+            ctx.fill()
+        }
 
-        // Функция рисования точек--------------------------------------------------
-        /*function drawPoints(points) {
+        // Filling circles by means of function higher------------------------
+        ctx.lineWidth = 4
+        ctx.fillStyle = "Purple"
+        circle(100, 100, 60)
+        ctx.fillStyle = "Blue"
+        circle(100, 100, 50)
+        ctx.fillStyle = "Green"
+        circle(100, 100, 40)
+        ctx.fillStyle = "Yellow"
+        circle(100, 100, 30)
+        ctx.fillStyle = "Orange"
+        circle(100, 100, 20)
+        ctx.fillStyle = "Red"
+        circle(100, 100, 10)
+
+        // Drawing a snowman (not a function)-------------------------------------
+        ctx.lineWidth = 4
+        circle(100, 100, 30, false, "Black")
+        circle(100, 105, 5, true, "Orange")
+        circle(90, 95, 5, true, "Black")
+        circle(110, 95, 5, true, "Black")
+        circle(100, 170, 40, false, "Black")
+        circle(100, 170, 5, true, "Black")
+        circle(100, 150, 5, true, "Black")
+        circle(100, 190, 5, true, "Black")
+
+        // Function of drawing a snowman-----------------------------------------
+        function drawSnowman(x, y) {
+            ctx.lineWidth = 4,
+                circle(x, y, 30, false, "Black")
+            var valueY1 = y + 5
+            circle(x, valueY1, 5, true, "Orange")
+            var valueX2 = x - 10
+            var valueY2 = y - 5
+            circle(valueX2, valueY2, 5, true, "Black")
+            var valueX3 = x + 10
+            var valueY3 = y - 5
+            circle(valueX3, valueY3, 5, true, "Black")
+            var valueY4 = y + 70
+            circle(x, valueY4, 40, false, "Black")
+            var valueY5 = y + 70
+            circle(x, valueY5, 5, true, "Black")
+            var valueY6 = y + 50
+            circle(x, valueY6, 5, true, "Black")
+            var valueY7 = y + 90
+            circle(x, valueY7, 5, true, "Black")
+        }
+        drawSnowman(225, 45)
+
+        // Drawing with mouse cursor------------------------------------------
+        $('#canvas').mousemove(function(event) {
+            var redCircle = circle(event.pageX, event.pageY, 3, true, "Red")
+        }) */
+
+
+
+        // Function of drawing dots-------------------------------------------
+        /* function drawPoints(points) {
             ctx.fillStyle = "Cornsilk"
             ctx.beginPath()
             var valueOne = points[0]
@@ -121,16 +183,17 @@
             ctx.lineTo(valueFifth1, valueFifth2)
             ctx.fill()
         }
+        // square-------------------------------------------------------------
+         var squarePoints = [
+            [50, 50],
+            [50, 100],
+            [100, 100],
+            [100, 50],
+            [50, 50]
+        ]
+        drawPoints(squarePoints) 
 
-        var points = [
-                [50, 50],
-                [50, 100],
-                [100, 100],
-                [100, 50],
-                [50, 50]
-            ]
-            drawPoints(points)
-
+        // mystic-------------------------------------------------------------
         var mysteryPoints = [
             [50, 50],
             [50, 100],
@@ -140,63 +203,11 @@
             [100, 90],
             [70, 120]
         ]
-        drawPoints(mysteryPoints)*/
+        drawPoints(mysteryPoints) */
 
-        /*drawPoints(points)*/
 
-        /*ctx.lineWidth = 4
-        circle(100, 100, 30, false, "Black")
-        circle(100, 105, 5, true, "Orange")
-        circle(90, 95, 5, true, "Black")
-        circle(110, 95, 5, true, "Black")
-        circle(100, 170, 40, false, "Black")
-        circle(100, 170, 5, true, "Black")
-        circle(100, 150, 5, true, "Black")
-        circle(100, 190, 5, true, "Black")*/
 
-        /*ctx.lineWidth = 4
-        circle(100, 100, 10, false, "Red")
-        circle(100, 100, 20, false, "Orange")
-        circle(100, 100, 30, false, "Yellow")
-        circle(100, 100, 40, false, "Green")
-        circle(100, 100, 50, false, "Blue")
-        circle(100, 100, 60, false, "Purple")
-
-        ctx.lineWidth = 4
-        circle(250, 100, 60, true, "Purple")
-        circle(250, 100, 50, true, "Blue")
-        circle(250, 100, 40, true, "Green")
-        circle(250, 100, 30, true, "Yellow")
-        circle(250, 100, 20, true, "Orange")
-        circle(250, 100, 10, true, "Red")*/
-
-        // Залить цветом круги-----------------------------------------
-        /*var canvas = document.getElementById("canvas")
-        var ctx = canvas.getContext("2d")
-        var circle = function(x, y, radius) {
-            ctx.beginPath()
-            ctx.arc(x, y, radius, 0, Math.PI * 2, false)
-            ctx.fill()
-        }
-        ctx.lineWidth = 4
-        ctx.fillStyle = "Purple"
-        circle(100, 100, 60)
-        ctx.fillStyle = "Blue"
-        circle(100, 100, 50)
-        ctx.fillStyle = "Green"
-        circle(100, 100, 40)
-        ctx.fillStyle = "Yellow"
-        circle(100, 100, 30)
-        ctx.fillStyle = "Orange"
-        circle(100, 100, 20)
-        ctx.fillStyle = "Red"
-        circle(100, 100, 10)*/
-
-        // Рисование курсором мыши---------------------------------------------------
-        /*$('#canvas').mousemove(function(event) {
-            var redCircle = circle(event.pageX, event.pageY, 3, true, "Red")
-        })*/
-
+        // Drawing a man------------------------------------------------------
         var canvas = document.getElementById("canvas")
         var ctx = canvas.getContext("2d")
         ctx.lineWidth = 4
@@ -214,22 +225,25 @@
         ctx.lineTo(50, 115)
         ctx.stroke()
 
-        /*ctx.strokeStyle = "Turquoise"
+
+
+        // Drawing a cross------------------------------------------------------
+        /* ctx.strokeStyle = "Turquoise"
         ctx.lineWidth = 4
         ctx.beginPath()
         ctx.moveTo(10, 10)
         ctx.lineTo(60, 60)
         ctx.moveTo(60, 10)
         ctx.lineTo(10, 60)
-        ctx.stroke()*/
+        ctx.stroke() */
 
-        //Robot
-        /*ctx.fillRect(45, 0, 50, 50)
+        // Drawing a robot------------------------------------------------------
+        /* ctx.fillRect(45, 0, 50, 50)
         ctx.fillRect(65, 50, 10, 20)
         ctx.fillRect(0, 70, 140, 10)
         ctx.fillRect(30, 80, 80, 70)
         ctx.fillRect(30, 150, 10, 60)
-        ctx.fillRect(100, 150, 10, 60)*/
+        ctx.fillRect(100, 150, 10, 60) */
     </script>
 </body>
 
