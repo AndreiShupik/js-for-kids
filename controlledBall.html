@@ -13,21 +13,21 @@
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
     <script>
         /*var keyNames = {
-                                            32: "space",
-                                            37: "left",
-                                            38: "up",
-                                            39: "right",
-                                            40: "down",
-                                            16: "SHIFT",
-                                            13: "ENTER/RETURN",
-                                            18: "ALT/OPTION",
-                                            }
+                    32: "space",
+                    37: "left",
+                    38: "up",
+                    39: "right",
+                    40: "down",
+                    16: "SHIFT",
+                    13: "ENTER/RETURN",
+                    18: "ALT/OPTION",
+                    }
 
-                                        $('body').keydown(function(event) {
-                                                console.log(keyNames[event.keyCode])
-                                            })*/
+                $('body').keydown(function(event) {
+                        console.log(keyNames[event.keyCode])
+                    })*/
         /*$('body').keydown(function(event) {
-            console.log(event.keyCode)
+        console.log(event.keyCode)
         })*/
 
         var canvas = document.getElementById('canvas')
@@ -123,8 +123,6 @@
             39: 'right',
             40: 'down'
         }
-
-
 
         $('body').keydown(function(event) {
             if (event.keyCode === 32 || event.keyCode === 37 || event.keyCode === 38 || event.keyCode === 39 || event.keyCode === 40) {
